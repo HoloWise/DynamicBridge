@@ -45,7 +45,14 @@ namespace DynamicBridge
             {
                 folder.AddItem(x.Folder, new(x.Draw));
             }
-            folder.Draw();
+            if(values.Count() == 1 && C.AutoExpand)
+            {
+                folder.Draw(true);
+            }
+            else{
+                folder.Draw(false);
+            }
+
         }
 
         public static bool CollectionSelectable<T>(Vector4? color, string label, T value, ICollection<T> collection, bool delayedOperation = false)

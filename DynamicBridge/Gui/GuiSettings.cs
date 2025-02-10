@@ -35,6 +35,15 @@ public static class GuiSettings
             ImGui.Checkbox($"Allow applying negative conditions", ref C.AllowNegativeConditions);
             ImGuiEx.HelpMarker("If you will enable this option, you will be able to mark any condition with cross marker. If any condition marked with cross within the rule is matching, that entire rule is ignored.");
             ImGui.Checkbox("Display full path in profile editor, where available", ref C.GlamourerFullPath);
+            if(!C.GlamourerFullPath)
+            {
+                ImGui.BeginDisabled();
+            }
+            ImGui.Checkbox("Auto expand folder tree if there's only one result", ref C.AutoExpand);
+            if (!C.GlamourerFullPath)
+            {
+                ImGui.EndDisabled();
+            }
             ImGuiEx.SetNextItemWidthScaled(150f);
             ImGuiEx.EnumCombo("Dropdown menu size", ref C.ComboSize, ComboFlagNames.ContainsKey, ComboFlagNames);
             if(ImGui.Checkbox($"Force update appearance on job and gearset changes", ref C.UpdateJobGSChange))

@@ -61,17 +61,29 @@ public class Folder
         }
     }
 
-    public void Draw()
+    public void Draw(bool expand)
     {
         ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, Vector2.One);
         for(var i = 0; i < Subfolders.Count; i++)
         {
             var item = Subfolders[i];
+            if(expand)
+            {
+                ImGui.SetNextItemOpen(true, ImGuiCond.Always);
+            }
             if(ImGuiEx.TreeNode(Colors.TabBlue, $"{item.Name}##fldr{Identifier}"))
             {
-                item.Draw();
+                if(expand)
+                {
+                    item.Draw(true);
+                }
+                else
+                {
+                    item.Draw(false);
+                }
                 ImGui.TreePop();
             }
+
         }
         for(var i = 0; i < Items.Count; i++)
         {
